@@ -1,0 +1,48 @@
+<%- include('header') -%>
+
+<%- include('navbar') -%>
+    <!-- Form -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/" method="POST" class="p-3 border rounded">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título:</label>
+                        <input type="text" class="form-control" id="titulo" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição:</label>
+                        <textarea class="form-control" id="descricao" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ToDoItems -->
+    <div class="row mt-4">
+        <div class="col-md-6 mx-auto">
+            <h3 class="text-center">Tarefas</h3>
+            <ul class="list-group">
+                <% newListItems.forEach((item, index) => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="w-75 text-truncate">
+                        <h4 class="text-truncate"><%= item.title %></h4>
+                        <p class="text-truncate"><%= item.description %></p>
+                    </div>
+                    <div class="d-flex">
+                        <form action="/remove/<%= index %>" method="post" style="display: inline;">
+                            <button class="btn" type="submit">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>    
+
+    
+<%- include('footer') -%>
