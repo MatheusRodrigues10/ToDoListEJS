@@ -16,6 +16,11 @@ app.get('/', (req, res) => {
     })
 });
 
+//pagina para contato
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
 //requerer dados dos inputs e redirecionar ao array items
 app.post('/', (req, res) => {
     const title = req.body.title;
