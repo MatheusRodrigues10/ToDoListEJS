@@ -40,6 +40,8 @@ app.post('/remove/:id', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('Running on 3000 Port')
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Running on ${port} Port`);
 });
