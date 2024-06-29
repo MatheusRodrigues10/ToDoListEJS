@@ -1,44 +1,55 @@
 const express = require('express');
-
+const session = require('express-session');
 const app = express();
 
+// Configuração do middleware para sessão
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({ extended: true}));
+let items = [];
 
-let items = []
-
-//renderizar lista na tela inicial e enviar items
+// Renderizar lista na tela inicial e enviar itens da sessão do usuário
 app.get('/', (req, res) => {
+    // Verifica se a sessão do usuário possui uma lista de itens
+    if (!req.session.items) {
+        req.session.items = [];
+    }
 
     res.render('list', {
-        newListItems: items
-    })
+        newListItems: req.session.items
+    });
 });
 
-//pagina para contato
+// Página para contato
 app.get('/about', (req, res) => {
     res.render('about');
 });
 
-//requerer dados dos inputs e redirecionar ao array items
+// Requerer dados dos inputs e redirecionar ao array items da sessão do usuário
 app.post('/', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
 
-    items.push({title, description})
-    res.redirect('/');
-})
+    // Adicionar novo item à lista na sessão do usuário
+    req.session.items.push({ title, description });
 
-//remover items usando id
-app.post('/remove/:id', (req, res) => {
-    const itemId = parseInt(req.params.id, 10);
-    if (itemId >= 0 && itemId < items.length) {
-        items.splice(itemId, 1);
-    }
     res.redirect('/');
 });
 
+// Remover item usando id da sessão do usuário
+app.post('/remove/:id', (req, res) => {
+    const itemId = parseInt(req.params.id, 10);
+    if (itemId >= 0 && itemId < req.session.items.length) {
+        req.session.items.splice(itemId, 1);
+    }
+    res.redirect('/');
+});
 
 const port = process.env.PORT || 3000;
 
