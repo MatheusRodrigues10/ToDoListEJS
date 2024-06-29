@@ -18,6 +18,7 @@
   "homepage": "https://github.com/MatheusRodrigues10/ToDoListEJS#readme",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
   }
 }
