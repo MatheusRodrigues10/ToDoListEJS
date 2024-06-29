@@ -14,7 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 
 let items = [];
 
+<<<<<<< HEAD
 // Renderizar lista na tela inicial
+=======
+// Renderizar lista na tela inicial e enviar itens da sessão do usuário
+>>>>>>> 0a43bebedff408c7794c649f9afd7dd9bc1d3976
 app.get('/', (req, res) => {
     // Verifica se a sessão do usuário possui uma lista de itens
     if (!req.session.items) {
@@ -31,7 +35,11 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+<<<<<<< HEAD
 // Requerer dados dos inputs e redirecionar ao array items
+=======
+// Requerer dados dos inputs e redirecionar ao array items da sessão do usuário
+>>>>>>> 0a43bebedff408c7794c649f9afd7dd9bc1d3976
 app.post('/', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;

@@ -4,7 +4,8 @@
   "description": "A simple toDoList using EJS.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build needed for this project'"
   },
   "repository": {
     "type": "git",
